@@ -1,0 +1,52 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+*.env
+*.venv/
+venv/
+.env
+
+# === Node.js / React ===
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+
+# === Logs ===
+*.log
+
+# === System Files ===
+.DS_Store
+Thumbs.db
+
+# === Docker ===
+*.pid
+*.seed
+*.pid.lock
+
+# === VSCode ===
+.vscode/
+
+# === Coverage / Testing ===
+.coverage
+htmlcov/
+coverage.xml
+*.cover
+*.pytest_cache/
+.cache/
+nosetests.xml
+test-results/
+
+# === Misc ===
+*.swp
+*.bak
+*.tmp
+*.out
+*.orig
+
+# === Ignore local Git ignores ===
+!.gitignore
