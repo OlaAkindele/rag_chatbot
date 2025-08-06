@@ -48,33 +48,13 @@ cd rag_chatbot
 
 - Fill in the OpenAI API key and custom Neo4j credentials as seen below:
 
-```python
+```env
 NEO4J_URI=bolt://neo4j:7687
 NEO4J_USERNAME=neo4j
 NEO4J_PASSWORD=password
 OPENAI_API_KEY=your-key-here
 OPENAI_MODEL=gpt-4o
 ```
-
-
-#### 🛠️ Development
-Backend (FastAPI/LangChain)
-
-```bash
-cd backend
-python -m venv venv
-source venv/bin/activate   # or venv\Scripts\activate on Windows
-pip install -r requirements.txt
-uvicorn app.main:app --reload
-```
-
-Frontend (React)
-```bash
-cd frontend
-npm install
-npm start
-```
-
 
 
 ### 3. Import Data into Neo4j
@@ -102,12 +82,13 @@ docker-compose exec neo4j bin/cypher-shell -u neo4j -p password -f /import/load_
 
 Open Neo4j Browser at http://localhost:7474, log in, and run:
 
+```arduino
 :play import/load_emails.cql
+```
 
 ### 6. Recreate the Vector Index (for vector search)
 ```bash
 docker-compose exec neo4j bin/cypher-shell -u neo4j -p password "CALL db.index.vector.createNodeIndex('emailEmbeddings','Email','embedding',1536,'cosine');" && docker-compose exec neo4j bin/cypher-shell -u neo4j -p password "CALL db.awaitIndexes();"
-
 ```
 
 ### 7. Restart the Backend
@@ -117,6 +98,25 @@ docker-compose restart backend
 
 ### 8. Open the React App
 Go to http://localhost:3000 and chat with React app (RAG Chatbot).
+
+
+#### 🛠️ Development
+Backend (FastAPI/LangChain)
+
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate   # or venv\Scripts\activate on Windows
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
+
+Frontend (React)
+```bash
+cd frontend
+npm install
+npm start
+```
 
 
 ## Need help?
