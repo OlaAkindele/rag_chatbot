@@ -1,4 +1,4 @@
-# Experimental Database Assistant Chatbot (RAG (Graph + Vector Search) + Neo4j + RAG-Evaluation)
+# Database Assistant Chatbot (RAG (Graph + Vector Search) + Neo4j + RAG-Evaluation)
 
 A full-stack, production-ready Retrieval-Augmented Generation (RAG) chatbot leveraging Neo4j, LangChain, OpenAI, and React. Query an enterprise-scale email database with natural language and receive context-aware, confidence-scored responses. Built for experimentation and extensibility!
 
@@ -8,11 +8,11 @@ A full-stack, production-ready Retrieval-Augmented Generation (RAG) chatbot leve
 
 - **RAG Chatbot:** Combines LLM reasoning with semantic vector search and graph querying.
 - **Neo4j Backend:** Powerful knowledge graph & vector search over emails.
-- **OpenAI LLMs:** Flexible, configurable language models (default: GPT-4o-mini).
-- **ReAct Agent:** Structured agent reasoning with tool use (Cypher, semantic search, fallback chat).
+- **OpenAI LLMs:** Flexible, configurable language models (default: GPT-4o).
+- **ReAct Agent:** Structured agent reasoning with tool use (Cypher, semantic search, fallback chat ).
 - **Web Frontend:** Fast, simple React UI with confidence scoring.
 - **Dockerized:** One-command setup for local or cloud environments.
-- **Evaluation:** Built-in RAG response evaluation for research/experimentation.
+- **Evaluation:** Built-in RAG response evaluation (RAG-Eval) for research/experimentation.
 
 ---
 
@@ -30,27 +30,32 @@ A full-stack, production-ready Retrieval-Augmented Generation (RAG) chatbot leve
 
 ### Prerequisites
 
+- [Neo4j](https://neo4j.com/)
+- [FastAPI](https://fastapi.tiangolo.com/)
+- [React](https://react.dev/)
 - [Docker](https://www.docker.com/products/docker-desktop) & [Docker Compose](https://docs.docker.com/compose/)
 - [Git](https://git-scm.com/)
 
 ### 1. Clone the Repo
 
 ```bash
-git clone https://github.com/your-username/rag_chatbot.git
+git clone https://github.com/OlaAkindele/rag_chatbot.git
 cd rag_chatbot
 ```
 
 ### 2. Configure Environment
-Create .env file in the project root directory
+- Create .env file in the project root directory
 
-Fill in your OpenAI API key and (optionally) custom Neo4j credentials as seen below:
----------------------------------------------
+- Fill in the OpenAI API key and custom Neo4j credentials as seen below:
+
+```python
 NEO4J_URI=bolt://neo4j:7687
 NEO4J_USERNAME=neo4j
 NEO4J_PASSWORD=password
 OPENAI_API_KEY=your-key-here
 OPENAI_MODEL=gpt-4o
----------------------------------------------
+```
+
 
 #### 🛠️ Development
 Backend (FastAPI/LangChain)
@@ -112,3 +117,7 @@ docker-compose restart backend
 
 ### 8. Open the React App
 Go to http://localhost:3000 and chat with React app (RAG Chatbot).
+
+
+## Need help?
+- **Open an issue or pull request on GitHub**  
