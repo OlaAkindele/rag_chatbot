@@ -1,6 +1,6 @@
 # Database Assistant Chatbot (RAG (Graph + Vector Search) + Neo4j + RAG-Evaluation)
 
-A full-stack, production-ready Retrieval-Augmented Generation (RAG) chatbot leveraging Neo4j, LangChain, OpenAI, and React. Query an enterprise-scale email database with natural language and receive context-aware, confidence-scored responses. Built for experimentation and extensibility!
+A full-stack, production-ready Retrieval-Augmented Generation (RAG) chatbot leveraging Neo4j, LangChain, OpenAI, and React. Query an enterprise-scale email database with natural language and receive context-aware, confidence-scored responses.
 
 ---
 
