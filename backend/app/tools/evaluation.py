@@ -1,15 +1,17 @@
 from typing import Union
 import json
 from app.core.config import settings
-from gpt_evaluation.evaluator import evaluate_response # for rag evaluation (rag_eval)
+from rag_evaluation.evaluator import evaluate_response # for rag evaluation (rag_eval)
 
 def evaluate_rag_model(
     query: str,
     response: str,
     source_document: Union[str, dict],
+    model_type: str,
+    model_name: str,
 ) -> float:
     """
-    Uses gpt_evaluation.evaluator to get a DataFrame of scores,
+    Uses rag_evaluation.evaluator to get a Dataframe of scores,
     then extracts the Overall Accuracy (percentage), converts to 0–1 float.
     """
     # gpt_evaluation.evaluator wants a plain text document
@@ -24,10 +26,13 @@ def evaluate_rag_model(
         query,
         response,
         doc_text,
-        model=settings.openai_model,
+        model_type= "openai",
+        model_name=settings.openai_model,
     )
     # df has columns: Metric, Score (Normalized), Score (%)
     # get the last row “Overall Accuracy”
     overall_pct = float(df.loc[df["Metric"] == "Overall Accuracy", "Score (%)"].iloc[0])
+    print("EVAL DF:", df)
+    print("Overall Accuracy:", overall_pct)
     # convert to 0–1
     return overall_pct / 100.0

@@ -54,8 +54,8 @@ RETURN sender.personId AS senderId, collect(receiver.personId) AS receiverIds, e
 ```
 MATCH (e:Email)
 OPTIONAL MATCH (e)<-[:RECEIVED]-(receiver:Person)
-WHERE toLower(e.subject) CONTAINS toLower('Stevenage Turnback Project')
-OR toLower(e.content) CONTAINS toLower('Stevenage Turnback Project')
+WHERE toLower(e.subject) CONTAINS toLower('London Meeting')
+OR toLower(e.content) CONTAINS toLower('London Meeting')
 RETURN e.emailId, e.revisionId, e.timeReceived, e.senderId, collect(receiver.personId) AS receiverIds, e.subject, e.content```
 
 6. To find emails based on a person's ID and a specified subject:
@@ -63,8 +63,8 @@ RETURN e.emailId, e.revisionId, e.timeReceived, e.senderId, collect(receiver.per
 MATCH (sender:Person)-[:SENT]->(e:Email)
 OPTIONAL MATCH (e)<-[:RECEIVED]-(receiver:Person)
 WHERE sender.personId = 'Person_700b29d2c283'
-AND (toLower(e.subject) CONTAINS toLower('Stevenage Contract')
-OR toLower(e.content) CONTAINS toLower('Stevenage Contract'))
+AND (toLower(e.subject) CONTAINS toLower('London Meeting')
+OR toLower(e.content) CONTAINS toLower('London Meeting'))
 RETURN sender.personId AS senderId, collect(receiver.personId) AS receiverIds, e.emailId, e.revisionId, e.timeReceived, e.content
 
 

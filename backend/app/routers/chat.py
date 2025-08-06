@@ -2,6 +2,7 @@ import json
 from fastapi import APIRouter
 from pydantic import BaseModel
 from app.tools.agent import generate_response 
+from app.core.config import settings
 from app.tools.evaluation import evaluate_rag_model
 
 # create a router instance to collect chat related endpoints
@@ -33,7 +34,7 @@ def chat_endpoint(req: ChatRequest):
         context = json.dumps(context, indent=2)
 
     # run the evaluation (rag_eval)
-    accuracy = evaluate_rag_model(req.message, reply, context)
+    accuracy = evaluate_rag_model(req.message, reply, context, model_type="opeanai", model_name=settings.openai_model)
 
     # return everything
     return ChatResponse(
