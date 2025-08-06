@@ -35,12 +35,12 @@ RETURN
     node.content AS text,
     score,
     {
-        emailSubject: node.subject,
-        senderName: node.senderName,
-        senderAddress: node.senderAddress,
-        timeReceived: node.timeReceived,
-        emailId: node.emailId,
-        documentId: node.documentId
+        subject: e.subject,
+        senderId: e.senderId,
+        receiverIds: collect(receiver.personId),
+        timeReceived: e.timeReceived,
+        emailId: e.emailId,
+        documentId: e.documentId
     } AS metadata
 """
         )

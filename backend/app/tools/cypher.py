@@ -24,47 +24,49 @@ Example of Cypher Statements:
 ```
 MATCH (sender:Person)-[:SENT]->(e:Email)
 WHERE e.emailId = 12452948
-RETURN sender, e.emailId, e.revisionId, e.timeReceived, e.content
+RETURN sender.personId AS senderId, e.emailId, e.revisionId, e.timeReceived, e.content
 ```
 
 2. To find who received an email:
 ```
 MATCH (receiver:Person)-[:RECEIVED]->(e:Email)
 WHERE e.emailId = 12452948
-RETURN receiver, e.emailId, e.revisionId, e.timeReceived, e.content
+RETURN receiver.personId AS receiverId, e.emailId, e.revisionId, e.timeReceived, e.content
 ```
 
 3. To find all emails where the sender and receiver are specified:
 ```
 MATCH (sender:Person)-[:SENT]->(e:Email)<-[:RECEIVED]-(receiver:Person)
 WHERE e.emailId = 12452948
-RETURN sender, e.emailId, receiver, e.revisionId, e.timeReceived, e.content
+RETURN sender.personId AS senderId, receiver.personId AS receiverId, e.emailId, e.revisionId, e.timeReceived, e.content
 ```
 
 4. To find email person where the subject or email content is specified:
 ```
 MATCH (sender:Person)-[:SENT]->(e:Email)
+OPTIONAL MATCH (e)<-[:RECEIVED]-(receiver:Person)
 WHERE toLower(e.subject) CONTAINS toLower('pull tester training')
-    OR toLower(e.content) CONTAINS toLower('pull tester training')
-RETURN sender, e.emailId, e.revisionId, e.timeReceived, e.content
+OR toLower(e.content) CONTAINS toLower('pull tester training')
+RETURN sender.personId AS senderId, collect(receiver.personId) AS receiverIds, e.emailId, e.revisionId, e.timeReceived, e.content
 ```
 
 5. To find emails based on their subject or content:
 ```
 MATCH (e:Email)
+OPTIONAL MATCH (e)<-[:RECEIVED]-(receiver:Person)
 WHERE toLower(e.subject) CONTAINS toLower('Stevenage Turnback Project')
-   OR toLower(e.content) CONTAINS toLower('Stevenage Turnback Project')
-RETURN e.emailId, e.revisionId, e.timeReceived, e.senderName, e.subject, e.content 
+OR toLower(e.content) CONTAINS toLower('Stevenage Turnback Project')
+RETURN e.emailId, e.revisionId, e.timeReceived, e.senderId, collect(receiver.personId) AS receiverIds, e.subject, e.content```
 
-```
-
-6. To find emails based on a person's name and a specified subject:
+6. To find emails based on a person's ID and a specified subject:
 ```
 MATCH (sender:Person)-[:SENT]->(e:Email)
-WHERE toLower(sender.email) CONTAINS toLower('Amy Holt')
-    AND (toLower(e.subject) CONTAINS toLower('Stevenage Contract')
-         OR toLower(e.content) CONTAINS toLower('Stevenage Contract'))
-RETURN sender, e.emailId, e.revisionId, e.timeReceived, e.content
+OPTIONAL MATCH (e)<-[:RECEIVED]-(receiver:Person)
+WHERE sender.personId = 'Person_700b29d2c283'
+AND (toLower(e.subject) CONTAINS toLower('Stevenage Contract')
+OR toLower(e.content) CONTAINS toLower('Stevenage Contract'))
+RETURN sender.personId AS senderId, collect(receiver.personId) AS receiverIds, e.emailId, e.revisionId, e.timeReceived, e.content
+
 
 ```
 
