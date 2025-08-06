@@ -81,7 +81,7 @@ OPENAI_MODEL=gpt-4o
 
 
 ### 3. Import Data into Neo4j
-Place email CSV file in the /import directory (default: Clean_Emails.csv).
+Place email CSV file in the /import directory (default: Clean_Emails.csv (A synthetic dataset)).
 
 The import Cypher is preconfigured in import/load_emails.cql.
 
