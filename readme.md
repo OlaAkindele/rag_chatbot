@@ -43,8 +43,6 @@ If you are on Windows, we strongly recommend enabling [WSL2](https://learn.micro
 
 ### Prerequisites
 
--## 🚀 Quick Start
-
 ### Prerequisites
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop) (required for Windows and Mac)
@@ -83,7 +81,7 @@ OPENAI_MODEL=gpt-4o
 
 
 ### 3. Import Data into Neo4j
-Place your email CSV file in the /import directory (default: Clean_Emails.csv).
+Place email CSV file in the /import directory (default: Clean_Emails.csv).
 
 The import Cypher is preconfigured in import/load_emails.cql.
 
@@ -98,13 +96,13 @@ Neo4j Browser: http://localhost:7474
 docker-compose up --build
 ```
 
-*If you run **docker-compose up --build* (without -d), your current terminal will be locked showing the live logs of your containers, so you can't type new commands there. So, to continue with the further steps, you might need to open another terminal*
+*If you run **docker-compose up --build** (without -d), your current terminal will be locked showing the live logs of your containers, so you can't type new commands there. So, to continue with the further steps, you might need to open another terminal*
 
 ```bash
 docker-compose up --build -d
 ```
 
-*If you used docker-compose up --build -d, your containers run in the background and your terminal is free for more commands. But you can always check live logs or stream separately using  **docker-compose logs -f***
+*If you used **docker-compose up --build -d**, the containers run in the background and your terminal is free for more commands. But you can always check logs or stream separately using  **docker-compose logs -f** after step 5-7 to see live logs*
 
 ### 5. Load Email Data (Graph data based on the project schema)
 ```bash
